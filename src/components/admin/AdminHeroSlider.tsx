@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
+import { UploadCloud, Check, Loader2 } from 'lucide-react';
 import { useCMS } from '../../context/CMSContext';
 import { HeroSlide } from '../../types';
 import { ImageField } from './ImageField';
 
 export function AdminHeroSlider() {
-  const { draftContent, saveHeroSlides } = useCMS();
+  const { draftContent, saveHeroSlides, publishDraft, isPublishing, showNotification } = useCMS();
   const rawSlides = Array.isArray(draftContent.heroSlides) ? draftContent.heroSlides : [];
+  const [isPublishingLocal, setIsPublishingLocal] = useState(false);
+  const [justPublished, setJustPublished] = useState(false);
+
+  const handlePublishLiveNow = async () => {
+    setIsPublishingLocal(true);
+    const success = await publishDraft();
+    setIsPublishingLocal(false);
+    if (success) {
+      setJustPublished(true);
+      showNotification('✅ All 3 Hero slides published live across all browsers!', 'success');
+      setTimeout(() => setJustPublished(false), 4000);
+    }
+  };
 
   // Exactly 3 slides: Slide 1, Slide 2, Slide 3
   const slides: HeroSlide[] = [
@@ -202,6 +216,40 @@ export function AdminHeroSlider() {
                 placeholder="e.g. Contact Us"
               />
             </div>
+          </div>
+
+          {/* Direct Publish Live Bar */}
+          <div className="pt-5 border-t border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <span className="text-[11px] text-neutral-400">
+              Editing Slide {activeSlideIndex + 1} of 3. Click below to publish updates live across all browsers and devices.
+            </span>
+            <button
+              type="button"
+              onClick={handlePublishLiveNow}
+              disabled={isPublishing || isPublishingLocal}
+              className={`px-5 py-2.5 rounded-xl font-medium text-xs flex items-center justify-center gap-2 transition-all shadow-sm ${
+                justPublished
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-[#1a1a1a] text-white hover:bg-[#b89753] hover:text-[#1a1a1a]'
+              } disabled:opacity-50`}
+            >
+              {justPublished ? (
+                <>
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Published Live!</span>
+                </>
+              ) : isPublishing || isPublishingLocal ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <span>Publishing...</span>
+                </>
+              ) : (
+                <>
+                  <UploadCloud className="w-3.5 h-3.5" />
+                  <span>Publish Hero Slides Live</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
       </div>

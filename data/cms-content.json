@@ -1,7 +1,7 @@
 {
   "published": {
-    "version": 13,
-    "lastUpdated": "2026-09-30T17:10:20.562Z",
+    "version": 15,
+    "lastUpdated": "2026-09-30T20:34:47.134Z",
     "brand": {
       "businessName": "Infinity Master Test",
       "tagline": "Where craftsmanship meets contemporary design.",
@@ -26,8 +26,8 @@
       "address": "Jos, Plateau State"
     },
     "social": {
-      "instagram": "https://www.instagram.com/infinity.furnitur?stkn=MW9tNW85Ynp3MXN0aQ==",
       "facebook": "https://www.facebook.com/share/1F9F3yRg5R/",
+      "instagram": "https://www.instagram.com/infinity.furnitur?stkn=MW9tNW85Ynp3MXN0aQ==",
       "tiktok": "https://vm.tiktok.com/ZS9D8Aah89WGw-Njpxl/",
       "twitter": "",
       "youtube": "",
@@ -85,23 +85,6 @@
         "enabled": true,
         "active": true,
         "order": 3
-      },
-      {
-        "id": "slide-4",
-        "overline": "Bespoke Joinery & Wardrobes",
-        "title": "Built with uncompromising standards.",
-        "subtitle": "Floor-to-ceiling architectural wardrobes tailored to maximize storage with unmatched elegance and generational durability.",
-        "description": "Floor-to-ceiling architectural wardrobes tailored to maximize storage with unmatched elegance and generational durability.",
-        "tagline": "Floor-to-ceiling architectural wardrobes tailored to maximize storage with unmatched elegance and generational durability.",
-        "primaryCtaText": "Discover Wardrobes",
-        "primaryCtaAction": "collection",
-        "secondaryCtaText": "Get in Touch",
-        "secondaryCtaAction": "contact",
-        "image": "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=2000&q=85",
-        "imageAlt": "Custom Architectural Wardrobes and Joinery",
-        "enabled": true,
-        "active": true,
-        "order": 4
       }
     ],
     "categories": [
@@ -483,8 +466,8 @@
     }
   },
   "draft": {
-    "version": 13,
-    "lastUpdated": "2026-09-30T17:10:20.562Z",
+    "version": 15,
+    "lastUpdated": "2026-09-30T20:34:47.134Z",
     "brand": {
       "businessName": "Infinity Master Test",
       "tagline": "Where craftsmanship meets contemporary design.",
@@ -509,8 +492,8 @@
       "address": "Jos, Plateau State"
     },
     "social": {
-      "instagram": "https://www.instagram.com/infinity.furnitur?stkn=MW9tNW85Ynp3MXN0aQ==",
       "facebook": "https://www.facebook.com/share/1F9F3yRg5R/",
+      "instagram": "https://www.instagram.com/infinity.furnitur?stkn=MW9tNW85Ynp3MXN0aQ==",
       "tiktok": "https://vm.tiktok.com/ZS9D8Aah89WGw-Njpxl/",
       "twitter": "",
       "youtube": "",
@@ -568,23 +551,6 @@
         "enabled": true,
         "active": true,
         "order": 3
-      },
-      {
-        "id": "slide-4",
-        "overline": "Bespoke Joinery & Wardrobes",
-        "title": "Built with uncompromising standards.",
-        "subtitle": "Floor-to-ceiling architectural wardrobes tailored to maximize storage with unmatched elegance and generational durability.",
-        "description": "Floor-to-ceiling architectural wardrobes tailored to maximize storage with unmatched elegance and generational durability.",
-        "tagline": "Floor-to-ceiling architectural wardrobes tailored to maximize storage with unmatched elegance and generational durability.",
-        "primaryCtaText": "Discover Wardrobes",
-        "primaryCtaAction": "collection",
-        "secondaryCtaText": "Get in Touch",
-        "secondaryCtaAction": "contact",
-        "image": "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=2000&q=85",
-        "imageAlt": "Custom Architectural Wardrobes and Joinery",
-        "enabled": true,
-        "active": true,
-        "order": 4
       }
     ],
     "categories": [

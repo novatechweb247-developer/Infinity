@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { UploadCloud, Check, Loader2 } from 'lucide-react';
 import { useCMS } from '../../context/CMSContext';
 import { ImageField } from './ImageField';
 
 export function AdminHomepage() {
-  const { draftContent, updateHomepage } = useCMS();
+  const { draftContent, updateHomepage, publishDraft, isPublishing, showNotification } = useCMS();
   const hp = draftContent.homepage;
+  const [isPublishingLocal, setIsPublishingLocal] = useState(false);
+  const [justPublished, setJustPublished] = useState(false);
+
+  const handlePublishLiveNow = async () => {
+    setIsPublishingLocal(true);
+    const success = await publishDraft();
+    setIsPublishingLocal(false);
+    if (success) {
+      setJustPublished(true);
+      showNotification('✅ Homepage & editorial image published live across all browsers!', 'success');
+      setTimeout(() => setJustPublished(false), 4000);
+    }
+  };
 
   const brandStatementHeadline =
     typeof hp.brandStatement === 'string'
@@ -165,6 +179,40 @@ export function AdminHomepage() {
             onChange={(e) => updateHomepage({ ctaHeading: e.target.value })}
             className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-2.5 text-sm font-serif text-[#1a1a1a] focus:outline-none focus:border-[#b89753]"
           />
+        </div>
+
+        {/* Direct Publish Live Bar */}
+        <div className="pt-5 border-t border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <span className="text-[11px] text-neutral-400">
+            Publish all homepage changes including the Editorial Craft Image live across all browsers.
+          </span>
+          <button
+            type="button"
+            onClick={handlePublishLiveNow}
+            disabled={isPublishing || isPublishingLocal}
+            className={`px-5 py-2.5 rounded-xl font-medium text-xs flex items-center justify-center gap-2 transition-all shadow-sm ${
+              justPublished
+                ? 'bg-emerald-600 text-white'
+                : 'bg-[#1a1a1a] text-white hover:bg-[#b89753] hover:text-[#1a1a1a]'
+            } disabled:opacity-50`}
+          >
+            {justPublished ? (
+              <>
+                <Check className="w-3.5 h-3.5" />
+                <span>Published Live!</span>
+              </>
+            ) : isPublishing || isPublishingLocal ? (
+              <>
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                <span>Publishing...</span>
+              </>
+            ) : (
+              <>
+                <UploadCloud className="w-3.5 h-3.5" />
+                <span>Publish Homepage Sections Live</span>
+              </>
+            )}
+          </button>
         </div>
       </div>
     </div>

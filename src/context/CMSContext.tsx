@@ -176,9 +176,9 @@ function ensureContentDefaults(raw: any): CMSContent {
       ...(raw.social || {}),
       twitter: '',
     },
-    heroSlides: Array.isArray(raw.heroSlides) && raw.heroSlides.length > 0
-      ? raw.heroSlides
-      : DEFAULT_CMS_CONTENT.heroSlides,
+    heroSlides: (Array.isArray(raw.heroSlides)
+      ? raw.heroSlides.filter((s: any) => s && s.id !== 'slide-4')
+      : DEFAULT_CMS_CONTENT.heroSlides).slice(0, 3),
     categories: Array.isArray(raw.categories) && raw.categories.length > 0
       ? raw.categories
       : DEFAULT_CMS_CONTENT.categories,

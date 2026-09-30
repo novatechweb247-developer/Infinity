@@ -127,9 +127,11 @@ function ensureServerContentDefaults(content: any): CMSContent {
   const effectiveAddress = rawAddress;
   const effectiveHours = incomingContact.openingHours || incomingContact.workingHours || incomingBrand.openingHours || incomingBrand.workingHours || DEFAULT_CMS_CONTENT.contact.openingHours;
 
-  const rawSlides = Array.isArray(content.heroSlides) && content.heroSlides.length > 0
-    ? content.heroSlides
-    : DEFAULT_CMS_CONTENT.heroSlides;
+  // Strictly enforce exactly 3 canonical hero slides everywhere
+  const filteredSlides = Array.isArray(content.heroSlides)
+    ? content.heroSlides.filter((s: any) => s && s.id !== 'slide-4')
+    : [];
+  const rawSlides = (filteredSlides.length > 0 ? filteredSlides : DEFAULT_CMS_CONTENT.heroSlides).slice(0, 3);
 
   const heroSlides = rawSlides.map((slide: any, idx: number) => {
     const s = (slide && typeof slide === 'object') ? slide : {};
@@ -151,7 +153,7 @@ function ensureServerContentDefaults(content: any): CMSContent {
       active: s.active !== false && s.enabled !== false,
       order: s.order || idx + 1,
     };
-  });
+  }).slice(0, 3);
 
   return {
     ...DEFAULT_CMS_CONTENT,

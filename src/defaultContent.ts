@@ -76,19 +76,6 @@ export const DEFAULT_CMS_CONTENT: CMSContent = {
       imageAlt: 'Comprehensive Architectural Interior Design',
       enabled: true,
     },
-    {
-      id: 'slide-4',
-      overline: 'Bespoke Joinery & Wardrobes',
-      title: 'Built with uncompromising standards.',
-      subtitle: 'Floor-to-ceiling architectural wardrobes tailored to maximize storage with unmatched elegance and generational durability.',
-      primaryCtaText: 'Discover Wardrobes',
-      primaryCtaAction: 'collection',
-      secondaryCtaText: 'Get in Touch',
-      secondaryCtaAction: 'contact',
-      image: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=2000&q=85',
-      imageAlt: 'Custom Architectural Wardrobes and Joinery',
-      enabled: true,
-    },
   ],
   categories: [
     {

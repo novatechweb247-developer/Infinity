@@ -43,18 +43,6 @@ export const HERO_SLIDES: HeroSlide[] = [
     image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=2000&q=85',
     imageAlt: 'Comprehensive Architectural Interior Design',
   },
-  {
-    id: 'slide-4',
-    overline: 'Bespoke Joinery & Wardrobes',
-    title: 'Built with uncompromising standards.',
-    subtitle: 'Floor-to-ceiling architectural wardrobes tailored to maximize storage with unmatched elegance and generational durability.',
-    primaryCtaText: 'Discover Wardrobes',
-    primaryCtaAction: 'collection',
-    secondaryCtaText: 'Get in Touch',
-    secondaryCtaAction: 'contact',
-    image: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=2000&q=85',
-    imageAlt: 'Custom Architectural Wardrobes and Joinery',
-  },
 ];
 
 interface HeroProps {
@@ -65,9 +53,10 @@ interface HeroProps {
 
 export function Hero({ onNavigate, onExplore, onContact }: HeroProps) {
   const { activeContent } = useCMS();
-  const slides = (activeContent?.heroSlides && activeContent.heroSlides.length > 0)
+  const rawSlides = (activeContent?.heroSlides && activeContent.heroSlides.length > 0)
     ? activeContent.heroSlides
     : HERO_SLIDES;
+  const slides = rawSlides.filter((s) => s && s.id !== 'slide-4').slice(0, 3);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);

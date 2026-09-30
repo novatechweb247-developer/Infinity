@@ -105,10 +105,13 @@ export function optimizeCMSPayload(content: CMSContent): CMSContent {
   if (!content) return content;
   return {
     ...content,
-    heroSlides: (content.heroSlides || []).map((s) => ({
-      ...s,
-      image: s.image || '',
-    })),
+    heroSlides: (content.heroSlides || [])
+      .filter((s) => s && s.id !== 'slide-4')
+      .slice(0, 3)
+      .map((s) => ({
+        ...s,
+        image: s.image || '',
+      })),
     products: (content.products || []).map((p) => {
       const primary = p.primaryImage || p.image || (p.images && p.images[0]) || '';
       const images = (p.images && p.images.length > 0) ? p.images : (primary ? [primary] : []);
@@ -187,6 +190,23 @@ export function cleanLegacyLocalStorage(): void {
       const val = localStorage.getItem(oldKey);
       if (val && !localStorage.getItem(newKey)) {
         localStorage.setItem(newKey, val);
+      }
+    }
+
+    // Automatically purge any stale slide-4 from cached entries
+    for (const key of [LOCAL_STORAGE_KEY_PUBLISHED, LOCAL_STORAGE_KEY_DRAFT]) {
+      const raw = localStorage.getItem(key);
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw);
+          if (parsed && Array.isArray(parsed.heroSlides)) {
+            const hasSlide4 = parsed.heroSlides.some((s: any) => s && s.id === 'slide-4') || parsed.heroSlides.length > 3;
+            if (hasSlide4) {
+              parsed.heroSlides = parsed.heroSlides.filter((s: any) => s && s.id !== 'slide-4').slice(0, 3);
+              localStorage.setItem(key, JSON.stringify(parsed));
+            }
+          }
+        } catch {}
       }
     }
   } catch (e) {
